@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Market;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Market\StoreProductCategory;
+use App\Models\Market\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
@@ -12,7 +14,8 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = ProductCategory::all();
+        return view('admin.market.product-category.index', compact('categories'));
     }
 
     /**
@@ -20,15 +23,16 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.market.product-category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductCategory $request)
     {
-        //
+        ProductCategory::query()->create($request->validated());
+        return to_route('admin.market.product-categories.index')->with('swal-success', 'دسته بندی با موفقیت ساخته شد');
     }
 
     /**

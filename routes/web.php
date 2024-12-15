@@ -39,6 +39,9 @@ require __DIR__ . '/auth.php';
 // Admin
 
 Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Dashboard
+    Route::view('/', 'admin.index');
     Route::prefix('content')->name('content.')->group(function () {
         Route::resource('menus', MenuController::class);
         Route::resource('faqs', FaqController::class);

@@ -42,6 +42,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard
     Route::view('/', 'admin.index');
+
+    // Content
     Route::prefix('content')->name('content.')->group(function () {
         Route::resource('menus', MenuController::class);
         Route::resource('faqs', FaqController::class);

@@ -4,8 +4,6 @@
 
 @section('content')
 
-
-
     <section class="row">
         <section class="col-12">
             <section class="main-body-container">
@@ -17,7 +15,8 @@
 
                     </div>
                     <div>
-                        <a href="{{ route('admin.market.product-categories.index') }}" class="btn btn-warning">بازگشت</a>
+                        <a href="{{ route('admin.market.product-categories.index') }}"
+                           class="btn btn-warning">بازگشت</a>
                     </div>
                 </section>
                 <section class="body-content">
@@ -35,8 +34,10 @@
                         <div class="col-md-6 mb-2">
                             <label for="status" class="form-label">وضعیت</label>
                             <select class="form-control" name="status" id="status">
-                                <option value="1" @selected( old('status', 1))>فعال</option>
-                                <option value="0" @selected( old('status', 0))>غیر فعال</option>
+                                @foreach(\App\Enums\CategoryStatus::cases() as $status)
+                                    <option
+                                        value="{{ $status->value }}" @selected($status->value === 'status')>{{ $status->getLabel() }}</option>
+                                @endforeach
                             </select>
                             @error('status')
                             <small class="text-danger text-sm">{{ $message }}</small>
@@ -53,8 +54,5 @@
             </section>
         </section>
     </section>
-
-
-
 
 @endsection

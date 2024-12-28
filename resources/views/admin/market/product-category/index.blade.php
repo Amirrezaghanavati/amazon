@@ -38,26 +38,28 @@
                         <td>{{ $category->slug }}</td>
                         <td>
                             @if ($category->status)
-                                <span>فعال</span>
+                                <span class="text-success">فعال</span>
                             @else
-                                <span>غیر فعال</span>
+                                <span class="text-danger">غیر فعال</span>
                             @endif
 
                         </td>
                         <td>
                             <div class="d-flex">
                                 <div class="mx-2">
-                                    <a href="http://localhost/php-shop/admin/market/product-category/delete/10"
-                                       class="text-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                                    <form action="{{ route('admin.market.product-categories.destroy', $category) }}" class="d-inline"
+                                          method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
-                                <div class="mx-2">
-                                    <a href="http://localhost/php-shop/admin/market/product-category/edit/10"
-                                       class="text-warning">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                </div>
+                                <a href="{{ route('admin.market.product-categories.edit', $category) }}"
+                                   class="text-warning">
+                                    <i class="fa fa-edit"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>

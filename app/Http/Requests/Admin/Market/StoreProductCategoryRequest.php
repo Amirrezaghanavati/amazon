@@ -2,15 +2,19 @@
 
 namespace App\Http\Requests\Admin\Market;
 
+use App\Enums\CategoryStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreProductCategoryRequest extends FormRequest
 {
     public function rules(): array
     {
         return [
-            'name' => ['required','filled', 'string', 'max:255'],
-            'status' => ['required', 'in:0,1']
+            'name'      => ['required', 'filled', 'string', 'max:255'],
+            'parent_id' => ['nullable', 'numeric', 'exists:product_categories,id'],
+            'slug'      => ['unique:product_categories,slug'],
+            'status'    => ['required', 'numeric', new Enum(CategoryStatus::class)]
         ];
     }
 

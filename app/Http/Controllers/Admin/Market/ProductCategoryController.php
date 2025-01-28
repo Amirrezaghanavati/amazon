@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\Market\StoreProductCategory;
 use App\Http\Requests\Admin\Market\StoreProductCategoryRequest;
 use App\Http\Requests\Admin\Market\UpdateProductCategoryRequest;
 use App\Models\Market\ProductCategory;
-use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
 {
@@ -21,18 +20,28 @@ class ProductCategoryController extends Controller
 
     public function create()
     {
-        return view('admin.market.product-category.create');
+        $parentCategories = ProductCategory::query()
+            ->with('children')
+            ->parent()
+            ->get();
+        return view('admin.market.product-category.create', compact('parentCategories'));
     }
 
     public function store(StoreProductCategoryRequest $request): \Illuminate\Http\RedirectResponse
     {
-        ProductCategory::query()->create($request->validated());
+        ProductCategory::query()
+            ->create($request->validated());
         return to_route('admin.market.product-categories.index')->with('swal-success', 'دسته بندی با موفقیت ساخته شد');
     }
 
     public function edit(ProductCategory $productCategory)
     {
-        return view('admin.market.product-category.edit', compact('productCategory'));
+        $parentCategories = ProductCategory::query()
+            ->with('children')
+            ->parent(true, $productCategory->id)
+            ->get();
+
+        return view('admin.market.product-category.edit', compact('productCategory', 'parentCategories'));
     }
 
     public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory): \Illuminate\Http\RedirectResponse

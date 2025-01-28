@@ -10,7 +10,7 @@
 
 @include('admin.layouts.partials.header')
 
-<section class="body-container">
+<section class="body-container bg-dark">
 
     @include('admin.layouts.partials.sidebar')
 
@@ -25,6 +25,7 @@
 @include('admin.layouts.scripts')
 @include('admin.alerts.sweetalert.error')
 @include('admin.alerts.sweetalert.success')
+@include('admin.alerts.sweetalert.delete-confirm')
 
 </body>
 

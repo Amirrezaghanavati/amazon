@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin\Market;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Market\StoreBrandRequest;
+use App\Http\Requests\Admin\Market\UpdateBrandRequest;
+use App\Models\Market\Brand;
+use App\Services\ImageUploadService;
 
 class BrandController extends Controller
 {
@@ -12,7 +15,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::all();
+        return view('admin.market.brand.index', compact('brands'));
     }
 
     /**
@@ -20,46 +24,54 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.market.brand.create');
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBrandRequest $request, ImageUploadService $imageUploadService): \Illuminate\Http\RedirectResponse
     {
-        //
+        $inputs = $request->validated();
+
+
+        if ($request->hasFile('logo')) {
+            $inputs['logo'] = app(ImageUploadService::class)->upload($request, 'logo');
+        }
+        Brand::query()->create($inputs);
+        return to_route('admin.market.brands.index')->with('swal-success', 'برند با موفقیت ساخته شد');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Brand $brand)
     {
-        //
+        return view('admin.market.brand.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBrandRequest $request, ImageUploadService $imageUploadService, Brand $brand)
     {
-        //
+        $inputs = $request->validated();
+
+
+        if ($request->hasFile('logo')) {
+            $inputs['logo'] = app(ImageUploadService::class)->upload($request, 'logo', $brand);
+        }
+
+        $brand->update($inputs);
+        return to_route('admin.market.brands.index')->with('swal-success', 'برند با موفقیت ویرایش شد');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return to_route('admin.market.brands.index')->with('swal-success', 'برند با موفقیت حذف شد');
+
     }
 }

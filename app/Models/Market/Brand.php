@@ -2,12 +2,23 @@
 
 namespace App\Models\Market;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Brand extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Sluggable;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['persian_name', 'english_name', 'slug', 'logo'];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source'   => 'persian_name',
+                'onUpdate' => true,
+            ]
+        ];
+    }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('persian_name')->nullable();
             $table->string('english_name')->nullable();
-            $table->string('slug')->unique()->nullable();
+            $table->string('slug')->nullable();
             $table->text('logo')->nullable();
             $table->timestamps();
             $table->softDeletes();

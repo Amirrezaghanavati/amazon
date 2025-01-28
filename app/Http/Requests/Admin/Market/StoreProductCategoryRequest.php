@@ -13,7 +13,6 @@ class StoreProductCategoryRequest extends FormRequest
         return [
             'name'      => ['required', 'filled', 'string', 'max:255'],
             'parent_id' => ['nullable', 'numeric', 'exists:product_categories,id'],
-            'slug'      => ['unique:product_categories,slug'],
             'status'    => ['required', 'numeric', new Enum(CategoryStatus::class)]
         ];
     }

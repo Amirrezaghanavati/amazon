@@ -15,7 +15,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::all();
+        $brands = Brand::paginate(1);
         return view('admin.market.brand.index', compact('brands'));
     }
 
@@ -58,7 +58,7 @@ class BrandController extends Controller
 
 
         if ($request->hasFile('logo')) {
-            $inputs['logo'] = app(ImageUploadService::class)->upload($request, 'logo', $brand);
+            $inputs['logo'] = app(ImageUploadService::class)->upload(request: $request, attribute: 'logo', record:$brand);
         }
 
         $brand->update($inputs);

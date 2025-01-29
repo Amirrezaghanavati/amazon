@@ -71,8 +71,8 @@
                             <input type="file"
                                    class="form-control form-control-sm @error('logo') border border-danger @enderror"
                                    name="logo" id="logo">
-                            <label for="logo" class="form-check-label mx-2 font-weight-bold">
-                                <img src="{{ asset($brand->logo)}}" class="w-50 rounded" alt="عکس">
+                            <label for="logo" class="mt-1 form-check-label mx-2 font-weight-bold">
+                                <img src="{{ asset($brand->logo)}}" class="w-50 rounded " alt="عکس">
                             </label>
                         </div>
                     </section>

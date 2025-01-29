@@ -28,8 +28,8 @@
                     <th>#</th>
                     <th>نام لاتین برند</th>
                     <th>نام برند</th>
-                    <th>لوگو</th>
                     <th>اسلاگ</th>
+                    <th>لوگو</th>
                     <th class="max-width-16-rem text-center"><i class="fa fa-cogs"></i>تنظیمات</th>
                 </tr>
                 </thead>
@@ -39,10 +39,10 @@
                         <th>{{ $loop->iteration }}</th>
                         <td>{{ $brand->english_name }}</td>
                         <td>{{ $brand->persian_name }}</td>
+                        <td>{{ $brand->slug }}</td>
                         <td class="shadow-sm text-center">
                             <img src="{{ asset($brand->logo) }}" alt="عکس" width="70" height="50" class="border rounded">
                         </td>
-                        <td>{{ $brand->slug }}</td>
 
 
                         <td class="width-16-rem text-center">
@@ -64,6 +64,7 @@
                 @empty @endforelse
                 </tbody>
             </table>
+            {{ $brands->links() }}
         </section>
     </section>
 @endsection

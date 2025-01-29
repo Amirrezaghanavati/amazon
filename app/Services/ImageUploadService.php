@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ImageUploadService
 {
 
-    public function uploadImage($file, $name = null)
+    public function uploadImage($file, $name = null): string
     {
         $folder = public_path();
         $year = Carbon::now()->year;
@@ -26,12 +26,11 @@ class ImageUploadService
         return $filePath . $fileName;
     }
 
-    public function removeImage($file)
+    public function removeImage($file): void
     {
         $file = ltrim($file);
 
         if (file_exists(public_path($file))) {
-//            dd('$file');
             unlink(public_path($file));
         }
     }

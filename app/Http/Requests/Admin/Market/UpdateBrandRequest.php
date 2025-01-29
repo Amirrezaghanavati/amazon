@@ -11,7 +11,7 @@ class UpdateBrandRequest extends FormRequest
         return [
             'persian_name' => ['required', 'filled', 'string', 'max:255'],
             'english_name' => ['required', 'filled', 'string', 'max:255'],
-            'logo'         => ['nullable', 'image', 'mimes:png,jpg,jpeg,gif'],
+            'logo'         => ['image', 'mimes:png,jpg,jpeg,gif'],
         ];
     }
 

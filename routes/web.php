@@ -46,8 +46,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Content
     Route::prefix('content')->name('content.')->group(function () {
         Route::resource('menus', MenuController::class);
+        Route::get('faqs/{faq}/status', [FaqController::class, 'status'])->name('faqs.status');
         Route::resource('faqs', FaqController::class);
-        Route::resource('faqs', PageController::class);
+        Route::resource('pages', PageController::class);
         Route::resource('comments', CommentController::class);
         Route::resource('posts', PostController::class);
     });

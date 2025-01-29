@@ -68,8 +68,8 @@
         </section>
     </section>
 @endsection
-@section('script')
-
+@section('scripts')
+    @parent
     @include('admin.alerts.sweetalert.delete-confirm', ['className' => 'delete'])
 
 @endsection

@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
-@section('head-tag')
-    <title>ایجاد برند</title>
-@endsection
+@section('title', 'ایجاد برند جدید')
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

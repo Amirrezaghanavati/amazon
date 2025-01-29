@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
-@section('head-tag')
-    <title>ایجاد دسته بندی</title>
-@endsection
+@section('title', 'ساخت دسته بندی جدید')
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Content\CommentController;
 use App\Http\Controllers\Admin\Content\FaqController;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\PageController;
+use App\Http\Controllers\Admin\Content\PostController;
 use App\Http\Controllers\Admin\Market\BrandController;
 use App\Http\Controllers\Admin\Market\CopanController;
 use App\Http\Controllers\Admin\Market\DeliveryController;
@@ -17,7 +18,6 @@ use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketController;
 use App\Http\Controllers\Home\Customer\AddressController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Content\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

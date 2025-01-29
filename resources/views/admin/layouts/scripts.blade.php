@@ -6,12 +6,5 @@
 <script src="{{ asset('admin-assets/sweetalert/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('admin-assets/select2/js/select2.min.js') }}"></script>
 
-<script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-</script>
 
 @show

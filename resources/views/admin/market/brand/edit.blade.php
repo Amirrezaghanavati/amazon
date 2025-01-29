@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
-@section('head-tag')
-    <title>ویرایش برند ها</title>
-@endsection
+@section('title', 'ویرایش برند ها')
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

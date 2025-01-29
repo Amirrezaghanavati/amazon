@@ -10,5 +10,5 @@ class Post extends Model
     use SoftDeletes;
 
 
-    protected $guarded = ['id'];
+    protected $fillable = ['title', 'body', 'view'];
 }

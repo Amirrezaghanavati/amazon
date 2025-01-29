@@ -81,7 +81,7 @@
                     <i class="fas fa-angle-left angle"></i>
                 </section>
                 <section class="sidebar-dropdown">
-                    <a href="" class="sidebar-link">
+                    <a href="{{ route('admin.content.posts.index') }}" class="sidebar-link">
                         <i class="fas fa-newspaper"></i><span>پست ها</span>
                     </a>
 

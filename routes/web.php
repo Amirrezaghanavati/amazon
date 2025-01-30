@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Content\CommentController;
+use App\Http\Controllers\Admin\Market\CommentController as ProductCommentController;
 use App\Http\Controllers\Admin\Content\FaqController;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\PageController;
@@ -61,6 +62,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::prefix('market')->name('market.')->group(function () {
+        Route::get('{comment}/status', [ProductCommentController::class, 'status'])->name('comments.status');
+        Route::resource('comments', ProductCommentController::class);
         Route::resource('product-categories', ProductCategoryController::class);
         Route::resource('brands', BrandController::class);
         Route::resource('products', ProductController::class);

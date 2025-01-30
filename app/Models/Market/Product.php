@@ -11,7 +11,23 @@ class Product extends Model
 {
     use SoftDeletes;
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'brand_id',
+        'product_category_id',
+        'name',
+        'description',
+        'slug',
+        'image',
+        'tags',
+        'price',
+        'sold_number',
+        'marketable_number',
+        'weight',
+        'length',
+        'width',
+        'height',
+        'marketable',
+        'status'];
 
     public function comments(): MorphMany
     {

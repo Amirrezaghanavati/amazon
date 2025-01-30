@@ -12,7 +12,7 @@ class ProductImageController extends Controller
      */
     public function index()
     {
-        //
+        dd('hi');
     }
 
     /**
@@ -20,7 +20,8 @@ class ProductImageController extends Controller
      */
     public function create()
     {
-        //
+        dd('hi');
+
     }
 
     /**
@@ -36,7 +37,8 @@ class ProductImageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        dd('hi');
+
     }
 
     /**
@@ -44,7 +46,8 @@ class ProductImageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        dd('hi');
+
     }
 
     /**

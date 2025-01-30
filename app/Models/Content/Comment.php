@@ -15,7 +15,7 @@ class Comment extends Model
 {
     use SoftDeletes;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['parent_id', 'user_id', 'commentable_id', 'commentable_type', 'body', 'status'];
 
     protected function casts(): array
     {
@@ -44,8 +44,13 @@ class Comment extends Model
         return $this->hasMany(__CLASS__, 'parent_id');
     }
 
-    public function scopeCommentModel(Builder $query): void
+    public function scopeBlogModel(Builder $query): void
     {
         $query->where('commentable_type', 'App\Models\Content\Post');
+    }
+
+    public function scopeProductModel(Builder $query): void
+    {
+        $query->where('commentable_type', 'App\Models\Market\Product');
     }
 }

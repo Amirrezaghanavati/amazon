@@ -88,7 +88,7 @@
                     <a href="" class="sidebar-link">
                         <i class="fas fa-list-alt"></i><span>دسته بندی ها</span>
                     </a>
-                    <a href="" class="sidebar-link disabled">
+                    <a href="{{ route('admin.content.comments.index') }}" class="sidebar-link disabled">
                         <i class="fas fa-comments"></i><span>نظرات</span>
                     </a>
                 </section>

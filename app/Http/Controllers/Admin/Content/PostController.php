@@ -29,6 +29,11 @@ class PostController extends Controller
         return to_route('admin.content.posts.index')->with('swal-success', 'پست با موفقیت ساخته شد');
     }
 
+    public function show(Post $post)
+    {
+        dd('jo');
+    }
+
     public function edit(Post $post)
     {
         return view('admin.content.blog.edit', compact('post'));

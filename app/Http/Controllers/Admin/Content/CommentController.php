@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Content;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Content\Comment;
 
 class CommentController extends Controller
 {
@@ -12,54 +12,34 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::query()
+            ->commentModel()->get();
+        $comments
+            ->where('status', 0)
+            ->each(fn($comment) => $comment->update(['status', 1]));
+
+
+        return view('admin.content.comment.index', compact('comments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function show(Comment $comment)
     {
-        //
+        if ($comment->seen === 0) {
+            $comment->seen = 1;
+            $comment->save();
+        }
+
+        return view('admin.content.comment.show', compact('comment'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function status(Comment $comment)
     {
-        //
+        $comment->status = $comment->status->value === 1 ? 2 : 1;
+        $comment->save();
+        return to_route('admin.content.comments.index')->with('swal-success', 'وضعیت نظر با موفقیت تغییر کرد');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

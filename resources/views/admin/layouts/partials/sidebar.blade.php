@@ -129,7 +129,7 @@
             <a href="{{ route('admin.content.faqs.index') }}" class="sidebar-link">
                 <i class="fas fa-question"></i><span>سوالات متداول</span>
             </a>
-            <a href="" class="sidebar-link">
+            <a href="{{ route('admin.content.pages.index') }}" class="sidebar-link">
                 <i class="fas fa-pager"></i><span>پیج ساز</span>
             </a>
             <a href="" class="sidebar-link">

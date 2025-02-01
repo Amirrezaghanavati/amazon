@@ -1,19 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\Content\CommentController;
-use App\Http\Controllers\Admin\Market\CommentController as ProductCommentController;
 use App\Http\Controllers\Admin\Content\FaqController;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\PageController;
 use App\Http\Controllers\Admin\Content\PostController;
 use App\Http\Controllers\Admin\Market\BrandController;
+use App\Http\Controllers\Admin\Market\CommentController as ProductCommentController;
 use App\Http\Controllers\Admin\Market\CopanController;
 use App\Http\Controllers\Admin\Market\DeliveryController;
 use App\Http\Controllers\Admin\Market\PaymentController;
 use App\Http\Controllers\Admin\Market\ProductCategoryController;
 use App\Http\Controllers\Admin\Market\ProductController;
 use App\Http\Controllers\Admin\Market\ProductImageController;
-use App\Http\Controllers\Admin\Setting\SettingController;
+use App\Http\Controllers\Admin\Setting\WebSettingController;
 use App\Http\Controllers\Admin\Ticket\TicketAdminController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketController;
@@ -67,7 +67,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('product-categories', ProductCategoryController::class);
         Route::resource('brands', BrandController::class);
         Route::resource('products', ProductController::class);
-        Route::resource('product-images/{product}', ProductImageController::class);
+//        Route::resource('product-images/{product}', ProductImageController::class);
         Route::resource('copan', CopanController::class);
         Route::resource('deliveries', DeliveryController::class);
         Route::resource('payments', PaymentController::class);
@@ -75,8 +75,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
     Route::prefix('setting')->name('setting.')->group(function () {
-        Route::resource('setting', SettingController::class);
-
+        Route::prefix('web-setting')->controller(WebSettingController::class)->name('web-setting.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('{setting}/set', 'set')->name('set');
+            Route::put('{setting}/', 'update')->name('update');
+        });
     });
 });
 

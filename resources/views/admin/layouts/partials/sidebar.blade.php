@@ -227,7 +227,7 @@
                 </section>
             </section>
             <section class="sidebar-part-title">تنظیمات</section>
-            <a href="" class="sidebar-link">
+            <a href="{{ route('admin.setting.web-setting.index') }}" class="sidebar-link">
                 <i class="fas fa-cog"></i>
                 <span>تنظیمات</span>
             </a>

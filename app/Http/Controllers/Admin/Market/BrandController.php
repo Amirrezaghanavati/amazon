@@ -56,7 +56,6 @@ class BrandController extends Controller
     {
         $inputs = $request->validated();
 
-
         if ($request->hasFile('logo')) {
             $inputs['logo'] = app(ImageUploadService::class)->upload(request: $request, attribute: 'logo', record:$brand);
         }

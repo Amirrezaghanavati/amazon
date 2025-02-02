@@ -19,12 +19,12 @@ return new class extends Migration
             $table->foreignIdFor(ProductCategory::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug')->unique()->nullable();
+            $table->string('slug')->nullable();
             $table->text('image')->nullable();
-            $table->text('tags');
+            $table->text('tags')->nullable();
             $table->bigInteger('price');
-            $table->bigInteger('sold_number');
-            $table->bigInteger('marketable_number');
+            $table->bigInteger('sold_number')->default(0);
+            $table->bigInteger('marketable_number')->default(0);
             $table->decimal('weight', 10, 2)->nullable();
             $table->decimal('length', 10, 2)->nullable();
             $table->decimal('width', 10, 2)->nullable();

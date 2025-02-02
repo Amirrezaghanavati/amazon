@@ -18,7 +18,7 @@
                     <a href="{{ route('admin.market.product-categories.index') }}" class="sidebar-link"><i class="fas fa-book"></i><span>دسته بندی</span></a>
                     <a href="" class="sidebar-link"> <i class="fas fa-envelope-open-text"></i><span>فرم کالا</span></a>
                     <a href="{{ route('admin.market.brands.index') }}" class="sidebar-link"> <i class="fas fa-infinity"></i><span>برندها</span></a>
-                    <a href="" class="sidebar-link"><i class="fas fa-tags"></i><span>کالاها</span></a>
+                    <a href="{{ route('admin.market.products.index') }}" class="sidebar-link"><i class="fas fa-tags"></i><span>کالاها</span></a>
                     <a href="" class="sidebar-link"> <i class="fas fa-warehouse"></i><span>انبار</span></a>
                     <a href="{{ route('admin.market.comments.index') }}" class="sidebar-link"> <i class="fas fa-comments"></i><span>نظرات</span></a>
                 </section>

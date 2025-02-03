@@ -52,9 +52,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        $product->load('brand', 'productCategory');
+        return view('admin.market.product.show', compact('product'));
     }
 
     /**
@@ -65,7 +66,6 @@ class ProductController extends Controller
         $categories = ProductCategory::all();
         $brands = Brand::all();
         return view('admin.market.product.edit', compact('product', 'categories', 'brands'));
-
     }
 
     /**

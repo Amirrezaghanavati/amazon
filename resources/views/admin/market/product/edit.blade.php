@@ -8,7 +8,7 @@
             <li class="breadcrumb-item font-size-12 p-0"><a href="">بخش فروش</a></li>
             <li class="breadcrumb-item font-size-12 p-0"><a href="{{ route('admin.market.products.index') }}">کالا</a>
             </li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ویرایش کالای جدید</li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ویرایش کالا</li>
         </ol>
     </nav>
     <section class="main-body-container">

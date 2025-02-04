@@ -63,7 +63,7 @@
                     <i class="fas fa-angle-left angle"></i>
                 </section>
                 <section class="sidebar-dropdown">
-                    <a href="" class="sidebar-link"><i class="fa fa-gift"></i><span> کوپن تخفیف</span></a>
+                    <a href="{{ route('admin.market.coupons.index') }}" class="sidebar-link"><i class="fa fa-gift"></i><span> کوپن تخفیف</span></a>
                     <a href="" class="sidebar-link"><i class="fab fa-shopify"></i><span>تخفیف عمومی</span></a>
                     <a href="" class="sidebar-link"><i class="fa fa-gifts"></i><span>فروش شگفت انگیز</span></a>
                 </section>

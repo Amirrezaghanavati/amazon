@@ -69,13 +69,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('products', ProductController::class);
         Route::prefix('product-images')->name('product-images.')->controller(ProductImageController::class)->group(function () {
             Route::get('{product}', 'index')->name('index');
-            Route::get('{product}/create', 'create')->name('create');
             Route::post('{product}', 'store')->name('store');
-            Route::get('{product}/{product-image}/edit', 'edit')->name('edit');
-            Route::put('{product}/{product-image}', 'update')->name('update');
-            Route::delete('{product}/{product-image}', 'destroy')->name('destroy');
+            Route::delete('{product}/{productImage}', 'destroy')->name('destroy');
         });
-        Route::resource('copan', CopanController::class);
+        Route::resource('coupons', CopanController::class);
         Route::resource('deliveries', DeliveryController::class);
         Route::resource('payments', PaymentController::class);
     });

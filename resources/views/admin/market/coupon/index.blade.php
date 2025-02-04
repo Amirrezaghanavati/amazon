@@ -1,62 +1,56 @@
 @extends('admin.layouts.app')
-@section('title', 'برند ها')
+@section('title', 'کوپن های تخفیف')
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item font-size-12">
                 <i class="fa fa-home text-muted"></i><a href="{{ route('admin.') }}">خانه</a></li>
             <li class="breadcrumb-item font-size-12 p-0"><a href="">بخش فروش</a></li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> کالا ها</li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> کوپن تخفیف</li>
         </ol>
     </nav>
 
     <section class="main-body-container">
-        <section class="main-body-container-header"><h4>کالا ها</h4></section>
+        <section class="main-body-container-header"><h4>کوپن های تخفیف</h4></section>
         <section class="body-content d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom pb-2">
-            <a href="{{ route('admin.market.products.create') }}" class="btn btn-info  border rounded-lg  btn-hover color-8">ایجاد
-                کالای جدید</a>
+            <a href="{{ route('admin.market.coupons.create') }}"
+               class="btn btn-info  border rounded-lg  btn-hover color-8">ایجاد
+                کوپن تخفیف</a>
             <div class="max-width-16-rem">
                 <input type="text" placeholder="جستجو" class="form-control form-control-sm form-text">
             </div>
         </section>
 
         <section class="table-responsive">
-            <table class="table table-striped table-hover h-150">
+            <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th> نام کالا</th>
-                    <th>تصویر کالا</th>
-                    <th>قیمت</th>
-                    <th>برند</th>
-                    <th>دسته</th>
+                    <th>کد تخفیف</th>
+                    <th>میزان تخفیف</th>
+                    <th>نوع تخفیف</th>
+                    <th>سقف تخفیف</th>
+                    <th>تاریخ شروع</th>
+                    <th>تاریخ پایان</th>
                     <th class="max-width-16-rem text-center"><i class="fa fa-cogs"></i> تنظیمات</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($products as $product)
-
+                @forelse($coupons as $coupon)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $product->name }}</td>
-                        <td class="shadow-sm text-center">
-                            <img src="{{ asset($product->image) }}" alt="عکس" width="90" height="70" class="border rounded">
-                        </td>
-                        <td>{{ number_format($product->price) }} تومان</td>
-                        <td>{{ $product->brand->persian_name }}</td>
-                        <td>{{ $product->productCategory->name }}</td>
+                        <td>{{ $coupon->code }}</td>
+                        <td>{{ $coupon->amount }}{{$coupon->amount_type == 0 ? '%' : ' تومان'}}</td>
+                        <td>{{ $coupon->amount_type === 0 ? '%' : 'واحد پول' }}</td>
+                        <td>{{ number_format($coupon->discount_ceiling) ?? 'ندارد' }}</td>
+                        <td>{{ jdate($coupon->start_date) }}</td>
+                        <td>{{ jdate($coupon->end_date) }}</td>
                         <td class="width-16-rem text-center">
-                            <a href="{{ route('admin.market.products.show', $product) }}"
-                               class="btn btn-info btn-sm border rounded-lg btn-hover color-10"><i
-                                    class="fa fa-eye"></i></a>
-                            <a href="{{ route('admin.market.products.edit', $product) }}"
+                            <a href="{{ route('admin.market.coupons.edit', $coupon) }}"
                                class="btn btn-primary btn-sm border rounded-lg  btn-hover color-9"><i
-                                    class="fa fa-pen"></i></a>
-                            <a href="{{ route('admin.market.product-images.index', $product) }}"
-                               class="btn btn-success btn-sm border rounded-lg btn-hover color-5"><i
-                                    class="fa fa-images text-dark-blue"></i></a>
+                                    class="fa fa-pen font-size-12"></i></a>
                             <form class="d-inline"
-                                  action="{{ route('admin.market.products.destroy', $product->id) }}"
+                                  action="{{ route('admin.market.coupons.destroy', $coupon) }}"
                                   method="post">
                                 @csrf
                                 @method('delete')
@@ -66,9 +60,8 @@
                                 </button>
                             </form>
                         </td>
-
+                    </tr>
                 @empty @endforelse
-
                 </tbody>
             </table>
         </section>
@@ -77,4 +70,5 @@
 @section('scripts')
     @parent
     @include('admin.alerts.sweetalert.delete-confirm', ['className' => 'delete'])
+
 @endsection

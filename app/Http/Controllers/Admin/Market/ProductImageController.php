@@ -3,66 +3,41 @@
 namespace App\Http\Controllers\Admin\Market;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Market\StoreProductImageRequest;
+use App\Models\Market\Product;
+use App\Models\Market\ProductImage;
+use App\Services\ImageUploadService;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ProductImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Product $product)
     {
-        dd('hi');
+        return view('admin.market.product.product-image.index', compact('product'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        dd('hi');
 
+
+
+    public function store(StoreProductImageRequest $request, Product $product, ImageUploadService $imageUploadService): RedirectResponse
+    {
+        $inputs = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $inputs['image'] = app(ImageUploadService::class)->upload($request);
+        }
+
+        $product->productImages()->create($inputs);
+        return to_route('admin.market.product-images.index', $product)->with('swal-success', 'تصویر محصول با موفقیت حذف شد');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function destroy(Product $product, ProductImage $productImage): RedirectResponse
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        dd('hi');
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        dd('hi');
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $productImage->delete();
+        return to_route('admin.market.product-images.index', $product)->with('swal-success', 'تصویر محصول با موفقیت حذف شد');
     }
 }

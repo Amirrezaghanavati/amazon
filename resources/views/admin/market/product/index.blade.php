@@ -52,6 +52,9 @@
                             <a href="{{ route('admin.market.products.edit', $product) }}"
                                class="btn btn-primary btn-sm border rounded-lg  btn-hover color-9"><i
                                     class="fa fa-pen"></i></a>
+                            <a href="{{ route('admin.market.product-images.index', $product) }}"
+                               class="btn btn-primary btn-sm border rounded-lg  btn-hover color-9"><i
+                                    class="fa fa-pen"></i></a>
                             <form class="d-inline"
                                   action="{{ route('admin.market.products.destroy', $product->id) }}"
                                   method="post">

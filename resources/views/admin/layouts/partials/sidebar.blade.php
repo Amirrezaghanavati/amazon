@@ -197,7 +197,7 @@
                             <i class="fas fa-user-tag"></i>
                             <span> تیکت های ادمین</span>
                         </a>
-                        <a href="" class="sidebar-link">
+                        <a href="{{ route('admin.ticket.ticket-categories.index') }}" class="sidebar-link">
                             <i class="fas fa-clipboard-list"></i>
                             <span>دسته بندی تیکت ها</span>
                         </a>

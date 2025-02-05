@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Ticket;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Ticket\StoreTicketCategoryRequest;
+use App\Http\Requests\Admin\Ticket\UpdateTicketCategoryRequest;
+use App\Models\Ticket\TicketCategory;
 use Illuminate\Http\Request;
 
 class TicketCategoryController extends Controller
@@ -12,54 +15,40 @@ class TicketCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $ticketCategories = TicketCategory::all();
+        return view('admin.ticket.ticket-category.index', compact('ticketCategories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        return view('admin.ticket.ticket-category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreTicketCategoryRequest $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        TicketCategory::query()
+            ->create($request->validated());
+        return to_route('admin.ticket.ticket-categories.index')->with('swal-success', 'دسته بندی تیکت با موفقیت ساخته شد');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(TicketCategory $ticketCategory)
     {
-        //
+
+
+        return view('admin.ticket.ticket-category.edit', compact('ticketCategory'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(UpdateTicketCategoryRequest $request, TicketCategory $ticketCategory): \Illuminate\Http\RedirectResponse
     {
-        //
+        $ticketCategory->update($request->validated());
+        return to_route('admin.ticket.ticket-categories.index')->with('swal-success', 'دسته بندی تیکت با موفقیت ویرایش شد');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(TicketCategory $ticketCategory): \Illuminate\Http\RedirectResponse
     {
-        //
-    }
+        $ticketCategory->delete();
+        return to_route('admin.ticket.ticket-categories.index')->with('swal-success', 'دسته بندی تیکت با موفقیت حذف شد');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

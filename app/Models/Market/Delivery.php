@@ -9,5 +9,5 @@ class Delivery extends Model
 {
     use SoftDeletes;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['name', 'amount', 'delivery_time', 'delivery_time_unit'];
 }

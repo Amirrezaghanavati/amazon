@@ -69,7 +69,7 @@
                 </section>
             </section>
 
-            <a href="" class="sidebar-link">
+            <a href="{{ route('admin.market.deliveries.index') }}" class="sidebar-link">
                 <i class="fas fa-truck"></i><span>روش های ارسال</span>
             </a>
 

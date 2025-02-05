@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('amount')->nullable();
             $table->integer('delivery_time')->nullable();
-            $table->string('delivery_time-unit')->nullable();
+            $table->string('delivery_time_unit')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

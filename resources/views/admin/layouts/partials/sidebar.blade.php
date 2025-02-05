@@ -47,7 +47,7 @@
                     <i class="fas fa-angle-left angle"></i>
                 </section>
                 <section class="sidebar-dropdown">
-                    <a href="" class="sidebar-link"><i class="fa fa-money-check"></i><span>تمام پرداخت ها</span></a>
+                    <a href="{{ route('admin.market.payments.index') }}" class="sidebar-link"><i class="fa fa-money-check"></i><span>تمام پرداخت ها</span></a>
                     <a href="" class="sidebar-link"><i class="fa fa-credit-card"></i><span>پرداخت های آنلاین</span></a>
                     <a href="" class="sidebar-link"><i class="fa fa-money-bill-alt"></i><span>پرداخت های آفلاین</span></a>
                     <a href="" class="sidebar-link"><i class="fa fa-money-check-alt"></i><span>پرداخت نشده</span></a>

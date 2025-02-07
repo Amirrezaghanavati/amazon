@@ -58,6 +58,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('ticket')->name('ticket.')->group(function () {
         Route::resource('ticket-categories', TicketCategoryController::class);
         Route::resource('ticket-admins', TicketAdminController::class);
+        Route::post('tickets/answer/{ticket}', [TicketController::class, 'answer'])->name('tickets.answer');
+        Route::get('tickets/change-status/{ticket}', [TicketController::class, 'changeStatus'])->name('tickets.changeStatus');
         Route::resource('tickets', TicketController::class);
     });
 

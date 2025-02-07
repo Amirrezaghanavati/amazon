@@ -169,7 +169,7 @@
             </section>
 
             <section class="sidebar-part-title">بخش تیکت ها ______________</section>
-            <a href="" class="sidebar-link">
+            <a href="{{ route('admin.ticket.tickets.index') }}" class="sidebar-link">
                 <i class="fas fa-tags"></i>
                 <span>همه ی تیکت ها</span>
             </a>

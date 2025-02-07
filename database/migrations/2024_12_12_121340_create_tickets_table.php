@@ -18,12 +18,12 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Ticket::class, 'parent_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignIdFor(TicketAdmin::class, 'reference_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(TicketAdmin::class, 'reference_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(TicketCategory::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('subject')->nullable();
             $table->text('body');
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

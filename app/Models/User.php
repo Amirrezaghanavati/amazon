@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Ticket\Ticket;
 use App\Models\Ticket\TicketAdmin;
+use App\Models\User\Otp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -25,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile'
     ];
 
     /**
@@ -58,6 +60,10 @@ class User extends Authenticatable
     public function admin(): HasOne
     {
         return $this->hasOne(TicketAdmin::class);
+    }
 
+    public function otps(): HasMany
+    {
+        return $this->hasMany(Otp::class);
     }
 }

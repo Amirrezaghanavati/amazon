@@ -17,13 +17,14 @@ use App\Http\Controllers\Admin\Setting\WebSettingController;
 use App\Http\Controllers\Admin\Ticket\TicketAdminController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketController;
+use App\Http\Controllers\Auth\OtpLoginController;
 use App\Http\Controllers\Home\Customer\AddressController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -39,7 +40,7 @@ require __DIR__ . '/auth.php';
 
 // Admin
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
 
     // Dashboard
     Route::view('/', 'admin.index');
@@ -91,4 +92,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::prefix('customer')->name('customer.')->group(function () {
     Route::resource('addresses', AddressController::class);
+});
+
+Route::prefix('otp')->name('otp.')->controller(OtpLoginController::class)->group(function () {
+    Route::post('send', 'sendOtp')->name('send');
+    Route::get('verify/{token}', 'showVerifyForm')->name('verify.form');
+    Route::post('verify', 'verifyOtp')->name('verify');
 });

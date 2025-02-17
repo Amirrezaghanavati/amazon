@@ -39,7 +39,7 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAnswerTicketRequest $request, Ticket $ticket)
+    public function update(UpdateAnswerTicketRequest $request, Ticket $ticket): RedirectResponse
     {
         $ticket->update(['body' => $request->body]);
         return to_route('admin.ticket.tickets.index')->with('swal-success', 'تیکت با موفقیت ویرایش شد');

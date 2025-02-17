@@ -1,6 +1,7 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+{{--        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}--}}
+        {{ 'این یک منطقه امن برنامه است. لطفاً قبل از ادامه رمز عبور خود را تأیید کنید.' }}
     </div>
 
     <form method="POST" action="{{ route('password.confirm') }}">
@@ -8,7 +9,8 @@
 
         <!-- Password -->
         <div>
-            <x-input-label for="password" :value="__('Password')" />
+{{--            <x-input-label for="password" :value="__('Password')" />--}}
+            <x-input-label for="password" :value="__('رمز عبور')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"

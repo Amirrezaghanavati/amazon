@@ -3,63 +3,49 @@
 namespace App\Http\Controllers\Home\Customer;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Home\Profile\StoreAddressRequest;
+use App\Http\Requests\Home\Profile\UpdateAddressRequest;
+use App\Models\User\Address;
+use App\Models\User\City;
+use Illuminate\Http\RedirectResponse;
 
 class AddressController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $addresses = Address::all();
+        return view('app.profile.my-address.index', compact('addresses'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $cities = City::all();
+        return view('app.profile.my-address.create', compact('cities'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreAddressRequest $request): RedirectResponse
     {
-        //
+        Address::query()->create($request->validated() + ['user_id' => auth()->id()]);
+        return to_route('profile.my-address.index')->with('swal-success', 'آدرس با موفقیت اضافه شد');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Address $myAddress)
     {
-        //
+        $cities = City::all();
+        return view('app.profile.my-address.edit', compact('cities', 'myAddress'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(UpdateAddressRequest $request, Address $myAddress): RedirectResponse
     {
-        //
+        $myAddress->update($request->validated());
+        return to_route('profile.my-address.index')->with('swal-success', 'آدرس با موفقیت ویرایش شد');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Address $myAddress): RedirectResponse
     {
-        //
+        $myAddress->delete();
+        return to_route('profile.my-address.index')->with('swal-success', 'آدرس با موفقیت حذف شد');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

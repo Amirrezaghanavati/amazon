@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Content\FaqController;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\PageController;
 use App\Http\Controllers\Admin\Content\PostController;
+use App\Http\Controllers\Admin\Market\BannerController;
 use App\Http\Controllers\Admin\Market\BrandController;
 use App\Http\Controllers\Admin\Market\CommentController as ProductCommentController;
 use App\Http\Controllers\Admin\Market\CopanController;
@@ -18,17 +19,49 @@ use App\Http\Controllers\Admin\Ticket\TicketAdminController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketController;
 use App\Http\Controllers\Auth\OtpLoginController;
+use App\Http\Controllers\Home\CartController;
+use App\Http\Controllers\Home\CheckOutController;
 use App\Http\Controllers\Home\Customer\AddressController;
+use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\OrderController;
+use App\Http\Controllers\Home\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+//Route::get('/', function () {
+//    return view('welcome');
+//})->name('home');
+//
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/product/{product}', 'product')->name('product');
+    Route::post('/add-comment/{product}', 'addComment')->name('add-comment');
+});
+Route::middleware('auth')->group(function () {
+    Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function () {
+        Route::get('/', 'cart');
+        Route::post('/{product}', 'addProduct')->name('add-product');
+        Route::delete('/{cartItem}', 'removeProduct')->name('remove-product');
+        Route::patch('/decrease/{cartItem}', 'decreaseItem')->name('decrease');
+    });
+
+    Route::controller(CheckOutController::class)->prefix('checkout')->name('checkout.')->group(function () {
+        Route::get('/{cart}', 'show');
+        Route::post('/apply-discount', 'applyDiscount')->name('apply-discount');
+    });
+
+    Route::post('order-complete/{cart}', [OrderController::class, 'orderComplete'])->name('order-complete');
+
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/my-orders', [CustomerOrderController::class, 'index'])->name('my-orders');
+        Route::resource('my-address', AddressController::class);
+    });
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -67,6 +100,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::prefix('market')->name('market.')->group(function () {
         Route::get('{comment}/status', [ProductCommentController::class, 'status'])->name('comments.status');
         Route::resource('comments', ProductCommentController::class);
+        Route::resource('banners', BannerController::class);
         Route::resource('product-categories', ProductCategoryController::class);
         Route::resource('brands', BrandController::class);
         Route::resource('products', ProductController::class);

@@ -72,6 +72,10 @@
             <a href="{{ route('admin.market.deliveries.index') }}" class="sidebar-link">
                 <i class="fas fa-truck"></i><span>روش های ارسال</span>
             </a>
+            <a href="{{ route('admin.market.banners.index') }}" class="sidebar-link">
+                <i class="fas fa-pager"></i><span>بنر ها</span>
+            </a>
+
 
             <section class="sidebar-part-title">بخش محتوی ________________</section>
             <section class="sidebar-group-link">
@@ -132,9 +136,7 @@
             <a href="{{ route('admin.content.pages.index') }}" class="sidebar-link">
                 <i class="fas fa-pager"></i><span>پیج ساز</span>
             </a>
-            <a href="" class="sidebar-link">
-                <i class="fas fa-pager"></i><span>بنر ها</span>
-            </a>
+
 
             <section class="sidebar-part-title">بخش کاربران ________________</section>
             <section class="sidebar-group-link">

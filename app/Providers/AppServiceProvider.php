@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\Market\ProductCategory;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +24,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
-//        auth()->loginUsingId(2);
+
+        Auth::loginUsingId(2);
+
+        $productCategories = ProductCategory::all();
+        $cart = Auth::check() ? auth()->user()->carts()
+            ->where('status', 0)
+            ->withCount('cartItems')
+            ->with('cartItems.product')
+            ->first() : [];
+        $cartTotalPrice = $cart?->total_price ?? 0;
+
+
+        View::share(compact('productCategories', 'cart', 'cartTotalPrice'));
     }
 }

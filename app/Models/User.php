@@ -3,8 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Content\Comment;
+use App\Models\Market\Cart;
+use App\Models\Market\Order;
 use App\Models\Ticket\Ticket;
 use App\Models\Ticket\TicketAdmin;
+use App\Models\User\Address;
 use App\Models\User\Otp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -48,11 +52,11 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
         ];
     }
 
-    public function tickets():HasMany
+    public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class);
     }
@@ -65,5 +69,27 @@ class User extends Authenticatable
     public function otps(): HasMany
     {
         return $this->hasMany(Otp::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+
+    }
+
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
+
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class);
     }
 }

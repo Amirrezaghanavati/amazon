@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Market;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Market\StoreProductRequest;
-use App\Http\Requests\Admin\Market\UpdateBrandRequest;
 use App\Http\Requests\Admin\Market\UpdateProductRequest;
 use App\Models\Market\Brand;
 use App\Models\Market\Product;

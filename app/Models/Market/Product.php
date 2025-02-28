@@ -44,7 +44,7 @@ class Product extends Model
 
     public function comments(): MorphMany
     {
-        return $this->morphMany(Comment::class, 'commentable')->chaperone();
+        return $this->morphMany(Comment::class, 'commentable')->with('user');
     }
 
     public function brand(): BelongsTo

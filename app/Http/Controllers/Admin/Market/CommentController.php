@@ -10,6 +10,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::query()
+            ->with(['user', 'commentable', 'parent'])
             ->productModel()->get();
 
         $comments
@@ -22,10 +23,10 @@ class CommentController extends Controller
 
     public function show(Comment $comment)
     {
+        $comment->load('children');
         if ($comment->seen === 0) {
             $comment->update(['status' => 1]);
         }
-
         return view('admin.market.comment.show', compact('comment'));
     }
 

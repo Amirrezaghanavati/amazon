@@ -43,7 +43,8 @@ class CartController extends Controller
     {
         $cart = Cart::firstOrCreate(
             [
-                'user_id' => auth()->user()->id, 'status' => 0
+                'user_id' => auth()->user()->id,
+                'status'  => 0
             ],
             [
                 'total_price'     => 0,
@@ -51,15 +52,17 @@ class CartController extends Controller
                 'expired_at'      => now()->addDays(7)
             ]);
 
+
         $cartItem = $cart->cartItems()->where('product_id', $product->id)->first();
 
 
-        if ($cartItem){
-            if ($cartItem->quantity < $product->marketable_number){
+        if ($cartItem) {
+            if ($cartItem->quantity < $product->marketable_number) {
                 $cartItem->increment('quantity');
                 $cartItem->update(['total_price' => $cartItem->quantity * $product->price]);
             }
-        }else{
+        } else {
+
             $cartItem = $product->cartItem()->create([
                 'cart_id'     => $cart->id,
                 'quantity'    => 1,
@@ -67,7 +70,8 @@ class CartController extends Controller
             ]);
         }
 
-        $cart->update(['total_price' => $cartItem->sum('total_price')]);
+
+        $cart->update(['total_price' => $cart->cartItems()->sum('total_price')]);
 
         return back()->with('swal-success', 'محصول با موفقیت به سبد خرید اضافه شد');
 
@@ -75,7 +79,7 @@ class CartController extends Controller
 
     public function removeProduct(CartItem $cartItem): RedirectResponse
     {
-        DB::transaction(function () use ($cartItem){
+        DB::transaction(function () use ($cartItem) {
             $cartItem->delete();
             $this->updateCartTotalPrice($cartItem->cart);
         });

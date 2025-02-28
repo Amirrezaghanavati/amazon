@@ -27,21 +27,13 @@
                         <!-- end content header -->
 
 
-                        <section class="d-flex justify-content-center my-4">
-{{--                            <x-order-status ></x-order-status>--}}
-                            <a class="btn btn-info btn-sm mx-1" href="{{ route('profile.my-orders', 'status=0') }}">در انتظار پرداخت</a>
-                            <a class="btn btn-warning btn-sm mx-1" href="{{ route('profile.my-orders', 'status=1') }}">در حال پردازش</a>
-                            <a class="btn btn-success btn-sm mx-1" href="{{ route('profile.my-orders', 'status=2') }}">تحویل شده</a>
-                            <a class="btn btn-danger btn-sm mx-1" href="{{ route('profile.my-orders', 'status=3') }}">مرجوعی</a>
-                            <a class="btn btn-dark btn-sm mx-1" href="{{ route('profile.my-orders', 'status=4') }}">لغو شده</a>
-                        </section>
-
+                        <x-orders-filter/>
 
                         <!-- start content header -->
                         <section class="content-header mb-3">
                             <section class="d-flex justify-content-between align-items-center">
                                 <h2 class="content-header-title content-header-title-small">
-                                   {{ \App\Enums\OrderStatusEnum::cases()[request()->query('status')]->getLabel() }}
+                                    {{ \App\Enums\OrderStatusEnum::getBy(request()->status)?->getLabel() }}
                                 </h2>
                                 <section class="content-header-link">
                                     <!--<a href="#">مشاهده همه</a>-->
@@ -64,7 +56,7 @@
                                                 {{ $order->id }}
                                             </section>
                                             <section class="order-item-status"><i class="fa fa-clock"></i>
-                                                {{ $order->status() }}
+                                                {{ $order->status }}
                                             </section>
                                             <section class="order-item-products mt-3">
 

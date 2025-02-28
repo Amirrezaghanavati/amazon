@@ -7,8 +7,9 @@
             <section class="d-md-flex justify-content-md-between align-items-md-center py-3">
 
                 <section class="d-flex justify-content-between align-items-center d-md-block">
-                    <a class="text-decoration-none" href="index.html"><img src="assets/images/logo/8.png"
-                                                                           alt="logo"></a>
+                    <a class="text-decoration-none" href="{{ route('index') }}"><img
+                            src="{{ asset('assets/images/logo/8.png') }}"
+                            alt="logo"></a>
                     <button class="btn btn-link text-dark d-md-none" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                         <i class="fa fa-bars me-1"></i>
@@ -63,10 +64,12 @@
                                 <section>
                                     <hr class="dropdown-divider">
                                 </section>
-                                <section><a class="dropdown-item" href="{{ route('logout') }}"><i
-                                            class="fa fa-sign-out-alt"></i>خروج</a>
-                                </section>
-
+                                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <section><button type="submit" class="dropdown-item"><i
+                                                class="fa fa-sign-out-alt"></i>خروج</button>
+                                    </section>
+                                </form>
                             </section>
                         </section>
                         <section class="header-cart d-inline ps-3 border-start position-relative">

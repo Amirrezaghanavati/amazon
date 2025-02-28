@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Market\ProductCategory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -24,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+        // Prevent lazy loading always.
+        Model::preventLazyLoading();
 
         Auth::loginUsingId(2);
 

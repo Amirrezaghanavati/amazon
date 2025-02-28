@@ -2,10 +2,12 @@
 
 namespace App\Models\Market;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Builder;
+
 class Order extends Model
 {
     use SoftDeletes;
@@ -28,28 +30,31 @@ class Order extends Model
         'payment_status',
         'delivery_status',
         'order_status',
-        'delivery_date',];
+        'delivery_date'
+    ];
+
+    // Accessors & Mutators
+
+    public function status(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => match ($this->order_status) {
+                0 => 'در انتظار پرداخت',
+                1 => 'در حال پردازش',
+                2 => 'تحویل شده',
+                3 => 'لغو شده',
+                4 => 'مرجوعی',
+            },
+        );
+    }
+
+    // Scopes
+
+    // Relationships
 
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
     }
-
-    public function status(): string
-    {
-        return match ($this->order_status) {
-            0 => 'در انتظار پرداخت',
-            1 => 'در حال پردازش',
-            2 => 'تحویل شده',
-            3 => 'لغو شده',
-            4 => 'مرجوعی',
-        };
-    }
-
-    public function scopeOrderStatus(Builder $query, $status)
-    {
-        $query->where('order_status', $status);
-    }
-
 
 }

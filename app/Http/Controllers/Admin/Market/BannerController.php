@@ -29,7 +29,7 @@ class BannerController extends Controller
 
 
         if ($request->hasFile('image')) {
-            $inputs['image'] = app(ImageUploadService::class)->upload($request);
+            $inputs['image'] = $imageUploadService->upload($request);
         }
         Banner::query()->create($inputs);
         return to_route('admin.market.banners.index')->with('swal-success', 'بنر با موفقیت ساخته شد');
@@ -47,7 +47,7 @@ class BannerController extends Controller
         $inputs = $request->validated();
 
         if ($request->hasFile('image')) {
-            $inputs['image'] = app(ImageUploadService::class)->upload($request);
+            $inputs['image'] = $imageUploadService->upload($request);
         }
         $banner->update($inputs);
         return to_route('admin.market.banners.index')->with('swal-success', 'بنر با موفقیت ویرایش شد');

@@ -19,9 +19,6 @@ class ProductImageController extends Controller
         return view('admin.market.product.product-image.index', compact('product'));
     }
 
-
-
-
     public function store(StoreProductImageRequest $request, Product $product, ImageUploadService $imageUploadService): RedirectResponse
     {
         $inputs = $request->validated();
